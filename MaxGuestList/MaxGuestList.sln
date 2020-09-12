@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxGuestList", "MaxGuestList\MaxGuestList.csproj", "{4DFEF7E0-243A-41B6-9B54-25D1A13819EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DFEF7E0-243A-41B6-9B54-25D1A13819EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFEF7E0-243A-41B6-9B54-25D1A13819EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFEF7E0-243A-41B6-9B54-25D1A13819EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFEF7E0-243A-41B6-9B54-25D1A13819EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
