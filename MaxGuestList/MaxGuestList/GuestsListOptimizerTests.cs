@@ -145,30 +145,7 @@ namespace MaxGuestList
             maxGuestsList.Should().ContainEquivalentOf(new[] {0, 3});
         }
 
-        [Test]
-        public void Large()
-        {
-            //GIVEN
-            var guests = Enumerable.Range(0, 10).ToArray();
-            var guestsCollisions = new List<(int, int)>
-            {
-                (0, 1),
-                (1, 2),
-                (2, 3)
-            };
-
-            var guestsListOptimizer = new GuestsListOptimizer(guests, guestsCollisions);
-
-            //WHEN
-            var maxGuestsLists = guestsListOptimizer.GetMaxNonCollidingGuestsConfigurations();
-
-            //THEN
-            maxGuestsLists.Should().HaveCount(3);
-            maxGuestsLists.Should().ContainEquivalentOf(new[] {0, 2});
-            maxGuestsLists.Should().ContainEquivalentOf(new[] {1, 3});
-            maxGuestsLists.Should().ContainEquivalentOf(new[] {0, 3});
-        }
-
+      
         [Test]
         public void ShouldReturn8PossibleGuestsLists()
         {
