@@ -44,7 +44,7 @@ namespace MaxGuestList
         }
 
         [Test]
-        public void ShouldReturnAllGuestsWhenExclusionListIsEmpty()
+        public void ShouldReturnAllGuestsWhenguestsCollisionsIsEmpty()
         {
             //GIVEN
             var guests = new[] {0, 1, 2};
@@ -150,13 +150,13 @@ namespace MaxGuestList
         public void ShouldReturn8PossibleGuestsLists()
         {
             //GIVEN
-            var exclusionList = new List<(int, int)>
+            var guestsCollisions = new List<(int, int)>
             {
                 (0, 1),
                 (2, 3),
                 (4, 5)
             };
-            var guestsListOptimizer = new GuestsListOptimizer(Enumerable.Range(0, 6).ToArray(), exclusionList);
+            var guestsListOptimizer = new GuestsListOptimizer(Enumerable.Range(0, 6).ToArray(), guestsCollisions);
 
             //WHEN
             var maxGuestsLists = guestsListOptimizer.GetMaxNonCollidingGuestsConfigurations();
@@ -178,11 +178,11 @@ namespace MaxGuestList
         {
             //GIVEN
             var anyGuest = Any.Integer();
-            var exclusionList = new List<(int, int)>
+            var guestsCollisions = new List<(int, int)>
             {
                 (anyGuest, anyGuest)
             };
-            var guestsListOptimizer = new GuestsListOptimizer(Any.Array<int>(), exclusionList);
+            var guestsListOptimizer = new GuestsListOptimizer(Any.Array<int>(), guestsCollisions);
 
             //WHEN
             Action act = () => guestsListOptimizer.GetMaxNonCollidingGuestsConfigurations();
