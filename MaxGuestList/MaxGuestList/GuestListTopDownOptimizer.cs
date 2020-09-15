@@ -10,14 +10,14 @@ namespace MaxGuestList
         NoCollision
     }
 
-    public class GuestsListOptimizer
+    public class GuestListTopDownOptimizer
     {
         private readonly int[] _guests;
         private readonly IEnumerable<(int first, int second)> _guestsCollisions;
         private readonly Dictionary<int, ISet<int>> _collisionsDict = new Dictionary<int, ISet<int>>();
         private readonly Dictionary<string, GuestsRelation> _memoTable = new Dictionary<string, GuestsRelation>();
 
-        public GuestsListOptimizer(int[] guests, IEnumerable<(int first, int second)> guestsCollisions)
+        public GuestListTopDownOptimizer(int[] guests, IEnumerable<(int first, int second)> guestsCollisions)
         {
             _guests = guests;
             _guestsCollisions = guestsCollisions;
@@ -60,7 +60,7 @@ namespace MaxGuestList
             }
         }
 
-        private GuestsRelation AnalyzeGuestsList(List<int> guestsList, List<List<int>> maxGuestsLists)
+        private GuestsRelation AnalyzeGuestsList(List<int> guestsList, List<List<int>> maxGuestLists)
         {
             //memoization is used for performance benefits only
             //to avoid recomputing the same problem during recursion
@@ -73,17 +73,17 @@ namespace MaxGuestList
 
             if (guestsList.Count == 2)
             {
-                AnalyzeForTwoGuests(guestsList, maxGuestsLists, memoKey);
+                AnalyzeForTwoGuests(guestsList, maxGuestLists, memoKey);
             }
             else
             {
-                AnalyzeForMoreThanTwoGuests(guestsList, maxGuestsLists, memoKey);
+                AnalyzeForMoreThanTwoGuests(guestsList, maxGuestLists, memoKey);
             }
 
             return _memoTable[memoKey];
         }
 
-        private void AnalyzeForTwoGuests(List<int> guestsList, List<List<int>> maxGuestsLists, string memoKey)
+        private void AnalyzeForTwoGuests(List<int> guestsList, List<List<int>> maxGuestLists, string memoKey)
         {
             var first = guestsList[0];
             var second = guestsList[1];
@@ -95,11 +95,11 @@ namespace MaxGuestList
             else
             {
                 _memoTable[memoKey] = GuestsRelation.NoCollision;
-                UpdateMaxGuestsList(guestsList, maxGuestsLists);
+                UpdateMaxGuestList(guestsList, maxGuestLists);
             }
         }
 
-        private void AnalyzeForMoreThanTwoGuests(List<int> guestsList, List<List<int>> maxGuestsLists, string memoKey)
+        private void AnalyzeForMoreThanTwoGuests(List<int> guestsList, List<List<int>> maxGuestLists, string memoKey)
         {
             var resultOfChildrenComputations = new List<GuestsRelation>();
 
@@ -113,7 +113,7 @@ namespace MaxGuestList
             {
                 var subproblemList = new List<int>(guestsList);
                 subproblemList.RemoveAt(indexOfGuestToRemove);
-                var childResult = AnalyzeGuestsList(subproblemList, maxGuestsLists);
+                var childResult = AnalyzeGuestsList(subproblemList, maxGuestLists);
                 resultOfChildrenComputations.Add(childResult);
             }
 
@@ -122,7 +122,7 @@ namespace MaxGuestList
             if (resultOfChildrenComputations.All(result => result == GuestsRelation.NoCollision))
             {
                 _memoTable[memoKey] = GuestsRelation.NoCollision;
-                UpdateMaxGuestsList(guestsList, maxGuestsLists);
+                UpdateMaxGuestList(guestsList, maxGuestLists);
             }
             else
             {
@@ -135,17 +135,17 @@ namespace MaxGuestList
             return _collisionsDict.TryGetValue(firstGuest, out var value) && value.Contains(secondsGuest);
         }
 
-        private void UpdateMaxGuestsList(List<int> currentGuestsList, List<List<int>> maxGuestsLists)
+        private void UpdateMaxGuestList(List<int> currentGuestsList, List<List<int>> maxGuestLists)
         {
-            var currentMaxGuestsListLength = maxGuestsLists.First().Count;
-            if (currentMaxGuestsListLength == currentGuestsList.Count)
+            var currentMaxGuestListLength = maxGuestLists.First().Count;
+            if (currentMaxGuestListLength == currentGuestsList.Count)
             {
-                maxGuestsLists.Add(currentGuestsList);
+                maxGuestLists.Add(currentGuestsList);
             }
-            else if (currentMaxGuestsListLength < currentGuestsList.Count)
+            else if (currentMaxGuestListLength < currentGuestsList.Count)
             {
-                maxGuestsLists.Clear();
-                maxGuestsLists.Add(currentGuestsList);
+                maxGuestLists.Clear();
+                maxGuestLists.Add(currentGuestsList);
             }
         }
 

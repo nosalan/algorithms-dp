@@ -9,6 +9,6 @@ GuestsCollisions: `(0,1)`
 Maximum guests lists are: `{0,2}` and `{1,2}`
 
 
-The represented solution uses dynamic programming to make smaller subproblems - by recursively removing one guest. If there are no guest collisions in any of subproblems then the  current guest list is maximal.
-The problem can be reduced to finding max cliques in a graph.
-The algorithm gives precise results but gets slow for more than 22 guests
+The represented solutions use dynamic programming to make smaller subproblems. In the Top-Down approach by recursively removing one guest. If there are no guest collisions in any of subproblems then the current guest list is maximal. In the Bottom-Up approach the algorith starts with empty table, then adds first guest, then follows the recursion tree by either including or not the next guest.  
+The problem can be reduced to finding max cliques in a graph.  
+The algorithm gives precise results but gets slow for larger number of guests.
